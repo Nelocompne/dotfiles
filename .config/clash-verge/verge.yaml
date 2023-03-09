@@ -1,0 +1,23 @@
+# Clash Verge Config
+
+app_singleton_port: null
+language: zh
+theme_mode: light
+theme_blur: false
+traffic_graph: true
+enable_tun_mode: true
+enable_service_mode: true
+enable_auto_launch: true
+enable_silent_start: true
+enable_system_proxy: false
+enable_proxy_guard: false
+system_proxy_bypass: null
+proxy_guard_duration: 30
+theme_setting: null
+web_ui_list: null
+clash_core: clash
+hotkeys: null
+auto_close_connection: false
+default_latency_test: ''
+enable_builtin_enhanced: true
+proxy_layout_column: 6

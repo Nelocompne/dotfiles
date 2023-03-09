@@ -1,0 +1,13 @@
+showNewVersionIcon: true
+hideAfterStartup: true
+randomControllerPort: true
+runTimeFormat: "hh : mm : ss"
+trayOrders:
+  - - icon
+  - - status
+    - traffic
+    - text
+hideTrayIcon: false
+connShowProcess: true
+showTrayProxyDelayIndicator: true
+fontFamily: 更纱黑体 UI SC
