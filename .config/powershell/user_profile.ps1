@@ -91,8 +91,7 @@ Set-Alias ahk $progbin\SciTE4AHK*\SciTE\SciTE.exe
 # cowsay https://github.com/Code-Hex/Neo-cowsay
 Set-Alias cowsay $progbin\cowsay*\cowsay.exe
 Set-Alias cowthink $progbin\cowsay*\cowthink.exe
-curl -s 'https://v1.hitokoto.cn/?c=k&c=d&c=i&encode=text&charset=gbk' \
---connect-timeout 0.2 -m 0.3 | cowsay
+curl -s 'https://v1.hitokoto.cn/?c=k&c=d&c=i&encode=text&charset=gbk' --connect-timeout 0.2 -m 0.3 | cowsay
 # 防止网络不好获取时间太长，单位秒，可浮点数精确到毫秒
 
 # geek uninstall
