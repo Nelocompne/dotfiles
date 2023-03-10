@@ -87,7 +87,6 @@ Set-Alias music $progbin\foobar2000\foobar2000.exe
 Set-Alias mpv $progbin\mpv*\mpv.exe
 Set-Alias ndd $progbin\ndd*\notepad--.exe
 Set-Alias ahk $progbin\SciTE4AHK*\SciTE\SciTE.exe
-Set-Alias imhex $progbin\imhex*\imhex.exe
 
 # cowsay https://github.com/Code-Hex/Neo-cowsay
 Set-Alias cowsay $progbin\cowsay*\cowsay.exe
