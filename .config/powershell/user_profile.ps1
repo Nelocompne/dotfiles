@@ -42,8 +42,14 @@ Set-Alias magick $progbin\ImageMagick*\magick.exe
 Set-Alias rclone $progbin\rclone.exe
 Set-Alias ahk $progbin\SciTE4AHK*\SciTE\SciTE.exe
 
-curl -s 'https://v1.hitokoto.cn/?c=k&c=d&c=i&encode=text&charset=gbk' --connect-timeout 0.2 -m 0.3 | cowsay
+$a_take = curl -s 'https://v1.hitokoto.cn/?c=k&c=d&c=i&encode=text&charset=gbk' --connect-timeout 0.2 -m 0.3
 # 防止网络不好获取时间太长，单位秒，可浮点数精确到毫秒
+
+$num = Get-Random -Maximum 101
+if ($num % 2 -eq 0)
+{ $a_take | cowsay }
+else
+{ $a_take | cowthink -b }
 
 function which ($command) {
   Get-Command -Name $command -ErrorAction SilentlyContinue |
