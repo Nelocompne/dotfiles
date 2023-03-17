@@ -1,12 +1,11 @@
 # 添加环境当前会话的环境变量
 # $Env:Path = 'c:\xxx;' + $Env:Path
 
-# 设置为utf-8格式
+# 设置终端输出为utf-8编码
 # $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
 
-# scoop install git
+# scoop install git curl jq less sudo
 # scoop bucket add extras
-# scoop install sudo curl jq less
 # scoop install z posh-git oh-my-posh
 Import-Module posh-git # 加载完至少300ms
 oh-my-posh init pwsh | Invoke-Expression
