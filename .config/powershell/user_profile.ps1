@@ -6,11 +6,12 @@
 
 # scoop install git curl jq less sudo
 # scoop bucket add extras
-# scoop install z posh-git oh-my-posh
+# scoop install z posh-git oh-my-posh terminal-icons
 Import-Module posh-git # 加载完至少300ms
 oh-my-posh init pwsh | Invoke-Expression
 oh-my-posh init pwsh --config '~/.config/powershell/ys.omp.json' | Invoke-Expression
 # 加载完至少300ms
+Import-Module -Name Terminal-Icons
 
 # scoop install PSReadLine
 Import-Module PSReadLine
