@@ -86,6 +86,16 @@
                 "outbound": "dns-out"
             },
             {
+                "port": 53,
+                "process_name": [
+                    "clash-win64.exe",
+                    "clash-meta.exe",
+                    "clash.exe",
+                    "Clash.Mini_x64.exe"
+                ],
+                "outbound": "dns-out"
+            },
+            {
                 "process_name": [
                     "nekoray_core",
                     "nekoray_core.exe",
