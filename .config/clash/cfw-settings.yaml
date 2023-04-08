@@ -11,3 +11,6 @@ hideTrayIcon: false
 connShowProcess: true
 showTrayProxyDelayIndicator: true
 fontFamily: 更纱黑体 UI SC
+showNotifications: false
+theme: 0
+editor: 0
