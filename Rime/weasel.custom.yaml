@@ -44,6 +44,15 @@ patch:
     name: Crevasse
     text_color: 0x332300
   "style/color_scheme": 617
-  "style/font_face": "霞鹜新晰黑"
-  "style/font_point": 14
-  "style/horizontal": true
+  style/font_face: "霞鹜新晰黑"
+  style/font_point: 14 #字体大小
+  style/vertical_text: false # 垂直排列
+  style/horizontal: true # 横排布局
+  # fork from https://github.com/fxliang/weasel
+  style/blur_window: false # 毛玻璃（测试）
+  style/layout/corner_radius: 10 # 边框边缘圆角半径
+  style/layout/round_corner: 10 # 候选词边缘圆角半径
+  style/layout/align_type: center #  options: top, center, bottom 
+  style/capture_by_click: true # 通过点击候选词窗口
+  style/layout/max_width: 500 # 窗口最大宽度 
+  style/layout/max_height: 0 # 窗口最大长度 （感觉没什么大用）
