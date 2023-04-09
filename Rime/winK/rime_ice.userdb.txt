@@ -1,0 +1,15 @@
+# Rime user dictionary
+#@/db_name	rime_ice
+#@/db_type	userdb
+#@/rime_version	1.8.5
+#@/tick	7
+#@/user_id	winK
+an jian 	按键	c=1 d=1 t=1
+dao 	到	c=1 d=1 t=5
+geng xin 	更新	c=1 d=1 t=3
+ke long 	克隆	c=1 d=1 t=4
+mu lu 	目录	c=1 d=1 t=7
+pin yin 	拼音	c=0 d=0.1 t=1
+pin yin she zhi 	拼音设置	c=1 d=1 t=2
+she zhi 	设置	c=0 d=0.1 t=1
+zhi ding 	指定	c=1 d=1 t=6
