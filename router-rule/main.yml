@@ -1,0 +1,157 @@
+# 子集存放目录名配合openclash
+
+proxy-providers:
+  example:
+    type: http
+    url: "https://example.com"
+    path: ./proxy_provider/example.yaml
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+
+proxy-groups:
+  - name: "PROXY"
+    type: select
+    proxies:
+      - DIRECT
+      - AUTO
+    use:
+      - example
+
+  - name: "AUTO"
+    type: url-test
+    use:
+      - example
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+
+  - name: "Telegram"
+    type: select
+    proxies:
+      - PROXY
+    use:
+      - example
+
+  - name: "SteamLOAD"
+    type: select
+    proxies:
+      - DIRECT
+      - PROXY
+    use:
+      - example
+
+  - name: "PASS"
+    type: select
+    proxies:
+      - DIRECT
+      - PROXY
+
+  - name: "Other"
+    type: select
+    proxies:
+      - DIRECT
+      - PROXY
+
+# ttps://github.com/Loyalsoldier/clash-rules/
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./rule_provider/reject.yaml
+    interval: 86400
+
+  direct:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./rule_provider/direct.yaml
+    interval: 86400
+
+  private:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
+    path: ./rule_provider/private.yaml
+    interval: 86400
+
+  gfw:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./rule_provider/gfw.yaml
+    interval: 86400
+
+  greatfire:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt"
+    path: ./rule_provider/greatfire.yaml
+    interval: 86400
+
+  tld-not-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+    path: ./rule_provider/tld-not-cn.yaml
+    interval: 86400
+
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+    path: ./rule_provider/telegramcidr.yaml
+    interval: 86400
+
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+    path: ./rule_provider/cncidr.yaml
+    interval: 86400
+
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+    path: ./rule_provider/lancidr.yaml
+    interval: 86400
+
+  applications:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+    path: ./rule_provider/applications.yaml
+    interval: 86400
+
+# https://www.dogfight360.com/blog/knowledge-base/fix_steamdl_region/
+  steamip:
+    type: file
+    behavior: ipcidr
+    path: ./game_rules/steamip.yaml
+
+  steamdomain:
+    type: file
+    behavior: domain
+    path: ./game_rules/steamdomain.yaml
+
+rules:
+  - RULE-SET,applications,PASS
+  - DOMAIN,clash.razord.top,PASS
+  - DOMAIN,yacd.haishan.me,PASS
+  - RULE-SET,private,PASS
+  - RULE-SET,reject,REJECT
+  - RULE-SET,steamip,SteamLOAD
+  - RULE-SET,steamdomain,SteamLOAD
+  - RULE-SET,tld-not-cn,PROXY
+  - RULE-SET,gfw,PROXY
+  - RULE-SET,greatfire,PROXY
+  - RULE-SET,direct,PASS
+  - RULE-SET,lancidr,PASS
+  - RULE-SET,cncidr,PASS
+  - RULE-SET,telegramcidr,Telegram
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,Other
