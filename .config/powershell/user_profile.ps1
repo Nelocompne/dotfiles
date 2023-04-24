@@ -30,7 +30,7 @@ Set-Alias vim nvim
 Set-Alias notepad code
 
 # scoop install ffmpeg yt-dlp neo-cowsay
-# scoop install aria2
+# scoop install aria2 rclone
 # scoop config aria2-enabled false
 # scoop install geekuninstaller
 
@@ -39,8 +39,6 @@ Set-Alias mpv $progbin\mpv*\mpv.exe
 Set-Alias music $progbin\foobar2000\foobar2000.exe
 Set-Alias img $progbin\ImageMagick*\IMDisplay.exe
 Set-Alias magick $progbin\ImageMagick*\magick.exe
-Set-Alias rclone $progbin\rclone.exe
-Set-Alias ahk $progbin\SciTE4AHK*\SciTE\SciTE.exe
 
 $a_take = curl -s `
 'https://v1.hitokoto.cn/?c=k&c=d&c=i&encode=text&charset=gbk' `
