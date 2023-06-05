@@ -1,8 +1,0 @@
-# Rime user dictionary
-#@/db_name	stroke
-#@/db_type	userdb
-#@/rime_version	1.8.5
-#@/tick	4
-#@/user_id	winK
-hhs 	亍	c=2 d=1.99005 t=4
-pps 	彳	c=2 d=1.98012 t=4
