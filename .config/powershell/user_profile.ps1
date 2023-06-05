@@ -34,11 +34,7 @@ Set-Alias notepad code
 # scoop config aria2-enabled false
 # scoop install geekuninstaller
 
-$progbin = '~\app'
-Set-Alias mpv $progbin\mpv*\mpv.exe
-Set-Alias music $progbin\foobar2000\foobar2000.exe
-Set-Alias img $progbin\ImageMagick*\IMDisplay.exe
-Set-Alias magick $progbin\ImageMagick*\magick.exe
+Set-Alias magick ~\ImageMagick\magick.exe
 
 $a_take = curl -s `
 'https://v1.hitokoto.cn/?c=k&c=d&c=i&encode=text&charset=gbk' `
