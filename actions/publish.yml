@@ -1,0 +1,28 @@
+name: Publish
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Publish Logseq graph
+    steps:
+      - uses: actions/checkout@v3
+      - uses: logseq/publish-spa@v0.1.0
+
+      - name: add a nojekyll file # to make sure asset paths are correctly identified
+        run: touch $GITHUB_WORKSPACE/www/.nojekyll
+
+      - uses: amondnet/vercel-action@v20 #deploy
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          vercel-args: '--prod' #Optional
+          vercel-org-id: ${{ secrets.ORG_ID}}  #Required
+          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
