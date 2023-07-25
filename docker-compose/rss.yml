@@ -1,0 +1,72 @@
+version: '3'
+
+networks:
+  rss:
+    external: false
+
+
+services:
+
+  miniflux:
+    image: miniflux/miniflux:latest
+    container_name: miniflux
+    ports:
+      - "8080:8080"
+    depends_on:
+      dbmini:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgres://miniflux:secret@dbmini/miniflux?sslmode=disable
+      - RUN_MIGRATIONS=1
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=admin_password
+      - DEBUG=1
+    # Optional health check:
+    # healthcheck:
+    #  test: ["CMD", "/usr/bin/miniflux", "-healthcheck", "auto"]
+    networks:
+      - rss
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+        reservations:
+          cpus: '0.25'
+
+  dbmini:
+    image: postgres:15
+    container_name: postgres_mini
+    environment:
+      - POSTGRES_USER=miniflux
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - ./miniflux-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "miniflux"]
+      interval: 10s
+      start_period: 30s
+    networks:
+      - rss
+
+
+# http://rsshub:1200/
+  rsshub:
+    image: diygod/rsshub:chromium-bundled
+#    ports:
+#      - "1200:1200"
+    environment:
+      NODE_ENV: production
+      CACHE_TYPE: redis
+      REDIS_URL: "redis://redis:6379/"
+    depends_on:
+      - redis
+    networks:
+      - rss
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - ./redis-data:/data
+    networks:
+      - rss
