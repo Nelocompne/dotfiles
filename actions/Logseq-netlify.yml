@@ -1,0 +1,33 @@
+name: Publish
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Publish Logseq graph
+    steps:
+      - uses: actions/checkout@v3
+      - uses: logseq/publish-spa@main
+        with:
+          graph-directory: .
+          output-directory: www
+          version: nightly
+
+      - name: add a nojekyll file # to make sure asset paths are correctly identified
+        run: touch $GITHUB_WORKSPACE/www/.nojekyll
+
+      - name: Publish
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --dir=www --functions=functions -p
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
