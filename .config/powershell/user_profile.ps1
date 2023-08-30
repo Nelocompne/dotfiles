@@ -34,7 +34,7 @@ Set-Alias notepad code
 # scoop config aria2-enabled false
 # scoop install geekuninstaller
 
-Set-Alias magick ~\ImageMagick\magick.exe
+# Set-Alias magick ~\ImageMagick\magick.exe
 
 $a_take = curl -s `
 'https://v1.hitokoto.cn/?c=k&c=d&c=i&encode=text&charset=gbk' `
