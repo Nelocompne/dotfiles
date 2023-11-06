@@ -1,0 +1,40 @@
+{
+  "inbounds": [
+    {
+      "type": "shadowsocks",
+      "tag": "ss-in",
+      "listen": "::",
+      "listen_port": ,
+      "network": "tcp",
+      "method": "2022-blake3-aes-128-gcm",
+      "password": ""
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "geosite": ["category-scholar-cn", "category-scholar-!cn"],
+        "outbound": "direct"
+      }
+    ],
+    "final": "block"
+  }
+}

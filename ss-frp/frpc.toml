@@ -1,0 +1,14 @@
+serverAddr = ""
+serverPort = 
+
+loginFailExit = false
+
+auth.method = "token"
+auth.token = ""
+
+[[proxies]]
+name = ""
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 
+remotePort = 

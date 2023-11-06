@@ -1,0 +1,8 @@
+bindAddr = "0.0.0.0"
+bindPort = 
+
+auth.method = "token"
+auth.token = ""
+
+allowPorts = [
+  { start = 10000, end = 19000 }
