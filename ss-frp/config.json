@@ -7,7 +7,7 @@
       "listen_port": ,
       "network": "tcp",
       "method": "2022-blake3-aes-128-gcm",
-      "password": ""
+      "password": "sing-box generate rand --base64 16"
     }
   ],
   "outbounds": [
