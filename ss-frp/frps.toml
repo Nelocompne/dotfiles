@@ -6,3 +6,4 @@ auth.token = ""
 
 allowPorts = [
   { start = 10000, end = 19000 }
+]
