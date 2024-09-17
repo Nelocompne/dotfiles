@@ -1,0 +1,12 @@
+serverAddr = ""
+serverPort = 7000
+auth.token = ""
+loginFailExit = false
+transport.protocol = "websocket"
+
+[[proxies]]
+name = "secret"
+type = "stcp"
+secretKey = ""
+localIP = "127.0.0.1"
+localPort = 3000

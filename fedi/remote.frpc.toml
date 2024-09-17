@@ -1,0 +1,18 @@
+serverAddr = ""
+serverPort = 7000
+auth.token = ""
+loginFailExit = false
+
+[[proxies]]
+name = "secret1"
+type = "stcp"
+secretKey = ""
+localIP = "127.0.0.1"
+localPort = 3000
+
+[[proxies]]
+name = "secret_2"
+type = "stcp"
+secretKey = ""
+localIP = "127.0.0.1"
+localPort = 4000
