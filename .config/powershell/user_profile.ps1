@@ -54,3 +54,24 @@ function which ($command) {
 
 function rm_rf ($path) { Remove-Item -Recurse -Force $path }
 function kills ($name) { kill -ProcessName $name }
+
+# https://github.com/maharmstone/btrfs/issues/398#issuecomment-872961219
+Function Check-FileNameSize([string]$Target) {
+    Get-ChildItem -LiteralPath $Target |
+    Foreach-Object {
+        If ($_ -is [System.IO.DirectoryInfo]) {
+            If ([System.Text.Encoding]::UTF8.GetByteCount($_.Name) -gt 255) {
+                Write-Output $_.FullName
+            }
+            Check-FileNameSize($_.FullName)
+        }
+        Elseif ($_ -is [System.IO.FileInfo]) {
+            If ([System.Text.Encoding]::UTF8.GetByteCount($_.Name) -gt 255) {
+                Write-Output $_.FullName
+            }
+        }
+        Else {
+            Write-Output "Unknown type: $_.FullName"
+        }
+    }
+}
