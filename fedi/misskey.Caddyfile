@@ -8,9 +8,6 @@ $domain {
   reverse_proxy  {
     to http://localhost:3001
 
-    stream_timeout 24h
-    stream_close_delay 5m
-
     header_up X-Forwarded-Port 443
     header_up X-Forwarded-Proto https
 
