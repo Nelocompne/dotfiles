@@ -1,0 +1,80 @@
+mixed-port: 7890
+
+proxy-providers:
+  example:
+    type: http
+    url: "http://localhost:25500/sub?"
+    path: ./proxy_provider/example.yaml
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+
+proxy-groups:
+  - name: "PROXY"
+    type: select
+    proxies:
+      - AUTO
+      - load-balance
+      - DIRECT
+    use:
+      - example
+  - name: "AUTO"
+    type: url-test
+    use:
+      - example
+    url: 'http://cp.cloudflare.com'
+    interval: 300
+  - name: "load-balance"
+    type: load-balance
+    use:
+      - example
+    url: 'http://cp.cloudflare.com'
+    interval: 300
+    lazy: true
+    disable-udp: false
+    strategy: round-robin
+
+rule-providers:
+  cn:
+    behavior: domain
+    interval: 86400
+    path: ./provider/rule-set/cn_domain.yaml
+    type: http
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.yaml"
+
+geodata-mode: true
+geox-url:
+  geoip: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
+  geosite: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
+  mmdb: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country.mmdb"
+  asn: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb"
+geo-auto-update: true
+geo-update-interval: 24
+
+
+rules:
+  - GEOSITE,private,DIRECT
+  - RULE-SET,cn,DIRECT
+  - GEOSITE,steam@cn,DIRECT
+  - GEOSITE,youtube,PROXY
+  - GEOSITE,google,PROXY
+  - GEOSITE,twitter,PROXY
+  - GEOSITE,pixiv,PROXY
+  - GEOIP,private,DIRECT,no-resolve
+  - GEOIP,telegram,PROXY
+  - GEOIP,JP,PROXY
+  - GEOIP,CN,DIRECT
+  - MATCH,PROXY
+
+mode: rule
+log-level: info
+external-controller: 0.0.0.0:9090
+external-controller-cors:
+  allow-origins:
+    - "*"
+  allow-private-network: true
+secret: ""
+external-ui: /path/to/ui/folder
+external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
