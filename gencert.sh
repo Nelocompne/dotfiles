@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+# 可通过该网址在线对证书进行信息解析 https://bkssl.com/ssl/parser/cer
+
 set -e
 
 DOMAIN="$1"
