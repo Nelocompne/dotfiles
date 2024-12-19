@@ -17,10 +17,16 @@
 set -e
 
 DOMAIN="$1"
+DAYS="$2"
 WORK_DIR="$(mktemp -d)"
 
 if [ -z "$DOMAIN" ]; then
   echo "Domain name needed."
+  exit 1
+fi
+
+if [ -z "$DAYS" ]; then
+  echo "DAYS needed."
   exit 1
 fi
 
@@ -37,7 +43,7 @@ echo "Gernerating cert for $DOMAIN ..."
 
 openssl genrsa -out $WORK_DIR/ca.key 4096
 
-openssl req -x509 -new -nodes -sha512 -days 365 \
+openssl req -x509 -new -nodes -sha512 -days $DAYS \
   -subj "/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=$DOMAIN" \
   -key $WORK_DIR/ca.key \
   -out $WORK_DIR/ca.crt
@@ -61,7 +67,7 @@ DNS.1=$DOMAIN
 DNS.2=*.$DOMAIN
 EOF
 
-openssl x509 -req -sha512 -days 365 \
+openssl x509 -req -sha512 -days $DAYS \
   -extfile $WORK_DIR/v3.ext \
   -CA $WORK_DIR/ca.crt -CAkey $WORK_DIR/ca.key -CAcreateserial \
   -in $WORK_DIR/server.csr \
@@ -71,5 +77,4 @@ openssl x509 -inform PEM -in $WORK_DIR/server.crt -out $WORK_DIR/$DOMAIN.cert
 
 mkdir -p ./$DOMAIN
 cp $WORK_DIR/server.key $WORK_DIR/server.crt ./$DOMAIN
-
 
