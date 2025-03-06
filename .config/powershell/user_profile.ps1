@@ -1,5 +1,6 @@
 # 添加环境当前会话的环境变量
 # $Env:Path = 'c:\xxx;' + $Env:Path
+$env:PATH="$env:USERPROFILE\scoop\shims;$env:PATH"
 
 # 设置终端输出为utf-8编码
 # $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
