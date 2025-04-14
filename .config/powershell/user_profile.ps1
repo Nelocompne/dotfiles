@@ -1,6 +1,6 @@
 # 添加环境当前会话的环境变量
 # $Env:Path = 'c:\xxx;' + $Env:Path
-$env:PATH="$env:USERPROFILE\scoop\shims;$env:PATH"
+$env:PATH="$env:USERPROFILE\scoop\shims;$env:PATH" #fix scoop envpath
 
 # 设置终端输出为utf-8编码
 # $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
@@ -35,7 +35,7 @@ Set-Alias notepad code
 # scoop config aria2-enabled false
 # scoop install geekuninstaller
 
-# Set-Alias magick ~\ImageMagick\magick.exe
+Set-Alias magick ~\ImageMagick\magick.exe
 
 $a_take = curl -s `
 'https://v1.hitokoto.cn/?c=k&c=d&c=i&encode=text&charset=gbk' `
@@ -54,7 +54,7 @@ function which ($command) {
 }
 
 function rm_rf ($path) { Remove-Item -Recurse -Force $path }
-function kills ($name) { kill -ProcessName $name }
+function pkill ($name) { kill -ProcessName $name }
 
 # https://github.com/maharmstone/btrfs/issues/398#issuecomment-872961219
 Function Check-FileNameSize([string]$Target) {
